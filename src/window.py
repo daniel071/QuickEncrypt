@@ -19,7 +19,8 @@ from gi.repository import Gtk
 
 
 @Gtk.Template(resource_path='/net/pavela/QuickEncrypt/main.ui')
-class QuickencryptWindow(Gtk.ApplicationWindow):
+class QuickencryptWindow
+(Gtk.ApplicationWindow):
     __gtype_name__ = 'QuickencryptWindow'
 
     label = Gtk.Template.Child()

@@ -15,36 +15,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
 import gi
 
-gi.require_version('Gtk', '3.0')
-
-from gi.repository import Gtk, Gio
-
-from .window import QuickencryptWindow
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
 
 
-class Application(Gtk.Application):
-    def __init__(self):
-        super().__init__(application_id='net.pavela.QuickEncrypt',
-                         flags=Gio.ApplicationFlags.FLAGS_NONE)
-
-        class Handler:
-            def onButtonPressed(self, button):
-                print("onSaveButtonPressed")
-
-        builder = Gtk.Builder()
-        builder.add_from_file("/home/daniel/Documents/Programming/Python/QuickEncrypt/src/main.ui")
-        builder.connect_signals(Handler())
-
-    def do_activate(self):
-        win = self.props.active_window
-        if not win:
-            win = QuickencryptWindow(application=self)
-        win.present()
+class Handler:
+    def onSaveButtonPressed(self, button):
+        print("Hello World!")
 
 
-def main(version):
-    app = Application()
-    return app.run(sys.argv)
+builder = Gtk.Builder()
+builder.add_from_file("/home/daniel/Documents/Programming/Python/QuickEncrypt/src/main.ui")
+builder.connect_signals(Handler())
+
+window = builder.get_object("QuickencryptWindow")
+window.show_all()
+
+Gtk.main()
+
