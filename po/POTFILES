@@ -1,0 +1,7 @@
+data/net.pavela.QuickEncrypt.desktop.in
+data/net.pavela.QuickEncrypt.appdata.xml.in
+data/net.pavela.QuickEncrypt.gschema.xml
+src/window.ui
+src/main.py
+src/window.py
+
