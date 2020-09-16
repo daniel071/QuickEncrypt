@@ -30,6 +30,14 @@ class Application(Gtk.Application):
         super().__init__(application_id='net.pavela.QuickEncrypt',
                          flags=Gio.ApplicationFlags.FLAGS_NONE)
 
+        class Handler:
+            def onButtonPressed(self, button):
+                print("onSaveButtonPressed")
+
+        builder = Gtk.Builder()
+        builder.add_from_file("/home/daniel/Documents/Programming/Python/QuickEncrypt/src/main.ui")
+        builder.connect_signals(Handler())
+
     def do_activate(self):
         win = self.props.active_window
         if not win:
