@@ -29,6 +29,13 @@ class Handler:
     def onLoadButtonPressed(self, button):
         open_file()
 
+    def onAboutButtonClicked(self, button):
+        aboutDialog = builder.get_object("aboutDialog")
+        aboutDialog.run()
+
+        aboutDialog.destroy()
+
+
 
 builder = Gtk.Builder()
 builder.add_from_file("/home/daniel/Documents/Programming/Python/QuickEncrypt/src/main.ui")
