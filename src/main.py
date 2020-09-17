@@ -36,11 +36,21 @@ class Handler:
         aboutDialog.destroy()
 
 
+# FIXME: Currently using relative paths so it only works on my machine, and
+# FIXME: flatpaks are broken. pls fix
+def get_resource_path(rel_path):
+    dir_of_py_file = os.path.dirname(__file__)
+    rel_path_to_resource = os.path.join(dir_of_py_file, rel_path)
+    abs_path_to_resource = os.path.abspath(rel_path_to_resource)
+    return abs_path_to_resource
+
 builder = Gtk.Builder()
 builder.add_from_file("/home/daniel/Documents/Programming/Python/QuickEncrypt/src/main.ui")
 builder.connect_signals(Handler())
 
+# FIXME: Icon doesn't seem to work yet
 window = builder.get_object("QuickencryptWindow")
+window.set_icon_from_file("/home/daniel/Documents/Programming/Python/QuickEncrypt/Icon/icon.png")
 window.show_all()
 
 def save_as_file():
