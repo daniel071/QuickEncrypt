@@ -36,7 +36,6 @@ class Handler:
         aboutDialog.destroy()
 
 
-
 builder = Gtk.Builder()
 builder.add_from_file("/home/daniel/Documents/Programming/Python/QuickEncrypt/src/main.ui")
 builder.connect_signals(Handler())

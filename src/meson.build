@@ -26,7 +26,6 @@ configure_file(
 )
 
 quickencrypt_sources = [
-  '__init__.py',
   'main.py',
 ]
 
