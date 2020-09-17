@@ -16,6 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import gi
+import os
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -24,6 +25,9 @@ from gi.repository import Gtk
 class Handler:
     def onSaveButtonPressed(self, button):
         save_as_file()
+
+    def onLoadButtonPressed(self, button):
+        open_file()
 
 
 builder = Gtk.Builder()
@@ -86,6 +90,52 @@ def write_file(file_path):
         # TODO: Fix this
         # self.title = self.filename + ' - ' + self.name
         # self.set_title(self.title)
+
+
+def open_file():
+    """Open a file from disk"""
+    open_dialog = Gtk.FileChooserDialog("Open",
+                        window,
+                        Gtk.FileChooserAction.OPEN,
+                        (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                        Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+
+    response = open_dialog.run()
+    if response == Gtk.ResponseType.OK:
+        # If the user pressed OK
+        # Get the path and filename
+        epicPath = open_dialog.get_filename()
+        epicFilename = os.path.basename(epicPath)
+
+        # Get the buffer
+        epicBuffer = builder.get_object("textBuffer")
+
+        # TODO: Fix this
+        # Add the filename to the window's title
+        # self.title = self.filename + " - " + self.name
+        # self.set_title(self.title)
+
+        # Add the contents of the file to the buffer
+        try:
+            _file = open(epicPath, 'r', encoding='utf-8')
+        except IOError:
+            self.error("Unable to open" + epicPath, "Check that you have proper permissions")
+            epicPath = None
+            self.filename = None
+            open_dialog.destroy()
+            return
+
+        epicBuffer.set_text(_file.read())
+        _file.close()
+
+        epicBuffer.set_modified(False)
+        open_dialog.destroy()
+
+    elif response == Gtk.ResponseType.CANCEL:
+        # The user clicked CANCEL
+        open_dialog.destroy()
+
+    open_dialog.destroy()
 
 Gtk.main()
 
