@@ -20,6 +20,9 @@ import os
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
+gi.require_version('Handy', '1')
+from gi.repository import Handy
+
 
 
 class Handler:
@@ -43,6 +46,7 @@ def get_resource_path(rel_path):
     rel_path_to_resource = os.path.join(dir_of_py_file, rel_path)
     abs_path_to_resource = os.path.abspath(rel_path_to_resource)
     return abs_path_to_resource
+
 
 builder = Gtk.Builder()
 builder.add_from_file("/home/daniel/Documents/Programming/Python/QuickEncrypt/src/main.ui")

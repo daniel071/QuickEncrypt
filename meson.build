@@ -5,6 +5,7 @@ project('quickencrypt',
                    ],
 )
 
+dependency('libhandy-1')
 i18n = import('i18n')
 
 
